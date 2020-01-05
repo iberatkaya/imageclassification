@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import * as cocoSsd from '@tensorflow-models/coco-ssd';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 import './App.css';
 
 /**
@@ -67,30 +69,18 @@ class App extends Component<Props, State> {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-          <div className="container">
-            <a className="navbar-brand">Image Class Detection</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarResponsive">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item active">
-                  <a className="nav-link" target="_blank" href="https://github.com/iberatkaya">Github</a>
-                </li>
-                <li className="nav-item active">
-                  <a className="nav-link" target="_blank" href="https://linkedin.com/in/ibrahim-berat-kaya/">LinkedIn</a>
-                </li>
-                <li className="nav-item active">
-                  <a className="nav-link" target="_blank" href="https://www.npmjs.com/package/@tensorflow-models/mobilenet">MobileNet</a>
-                </li>
-                <li className="nav-item active">
-                  <a className="nav-link" target="_blank" href="https://www.npmjs.com/package/@tensorflow-models/coco-ssd">COCO-SSD</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+        <Navbar bg="dark" expand="lg">
+          <Navbar.Brand style={{color: '#eee'}} href="#home">Image Class Detection</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ml-auto">
+              <Nav.Link style={{color: '#eee'}} target="_blank" rel="noopener noreferrer" href="https://github.com/iberatkaya">GitHub</Nav.Link>
+              <Nav.Link style={{color: '#eee'}} target="_blank" rel="noopener noreferrer" href="https://linkedin.com/in/ibrahim-berat-kaya">LinkedIn</Nav.Link>
+              <Nav.Link style={{color: '#eee'}} target="_blank" rel="noopener noreferrer" href="https://www.npmjs.com/package/@tensorflow-models/mobilenet">MobileNet</Nav.Link>
+              <Nav.Link style={{color: '#eee'}} target="_blank" rel="noopener noreferrer" href="https://www.npmjs.com/package/@tensorflow-models/coco-ssd">COCO-SSD</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
 
         <div className="container">
           <div className="row">
@@ -132,7 +122,7 @@ class App extends Component<Props, State> {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="text-center">
-                        <img ref="image" style={{ maxWidth: '60%' }} className="img-responsive" src={this.state.image}></img>
+                        <img alt="input" ref="image" style={{ maxWidth: '60%' }} className="img-responsive" src={this.state.image}></img>
                       </div>
                       <p></p> {/* Moves button to bottom of image */}
                       {!this.state.scanned ?
@@ -146,7 +136,7 @@ class App extends Component<Props, State> {
                             console.log(predcocossd);
                             this.setState({ mobilenetPred: predmobilenet, cocossdPred: predcocossd, scanned: true });
 
-                          }}>Scan</button>
+                          }}>Classify</button>
                         </div>
                         :
                         <div className="container">
@@ -162,8 +152,8 @@ class App extends Component<Props, State> {
                           </ul>
                           <div className="text-center">
                             <button className="btn btn-outline-primary" onClick={async () => {
-                              this.setState({image: '', mobilenetPred: [], cocossdPred: [], scanned: false})
-                            }}>Scan New Image</button>
+                              this.setState({ image: '', mobilenetPred: [], cocossdPred: [], scanned: false })
+                            }}>Classify New Image</button>
                           </div>
                         </div>
                       }
