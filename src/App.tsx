@@ -61,7 +61,7 @@ class App extends Component<Props, State> {
 
 
   onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    let file = URL.createObjectURL(e.target.files![0]);
+    const file = e.target.files![0];
     this.setState({ image: file })
   }
 
@@ -126,7 +126,7 @@ class App extends Component<Props, State> {
                       </div>
                       <p></p> {/* Moves button to bottom of image */}
                       {!this.state.scanned ?
-                        <div className="text-center">
+                        <div className="text-center mb-2">
                           <button className="btn btn-outline-primary" onClick={async () => {
                             const modelMobilenet = this.state.modelMobilenet;
                             const modelCocoSsd = this.state.modelCocoSsd;
@@ -150,7 +150,7 @@ class App extends Component<Props, State> {
                               return <li className="list-group-item">Prediction: {i.class} - Probability: {parseFloat(i.score).toFixed(3)}</li>
                             })}
                           </ul>
-                          <div className="text-center">
+                          <div className="text-center mt-2 mb-2">
                             <button className="btn btn-outline-primary" onClick={async () => {
                               this.setState({ image: '', mobilenetPred: [], cocossdPred: [], scanned: false })
                             }}>Classify New Image</button>
